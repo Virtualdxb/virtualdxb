@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import heroImage from './assets/virtualdxb-dubai-hero.png'
 import './App.css'
 
@@ -47,8 +47,6 @@ const faqs = [
   ['Can the service feel like our own team?', 'Yes. We align greetings, tone, scripts, escalation rules, and handover formats to your business.'],
 ]
 
-const formSubmitEmail = 'virtualdxb.business@gmail.com'
-const formSubmitAction = `https://formsubmit.co/${formSubmitEmail}`
 const whatsAppNumber = '971500000000'
 
 function Logo() {
@@ -80,26 +78,70 @@ function SkylineDivider() {
 }
 
 function LeadForm() {
+  const [status, setStatus] = useState('idle')
+  const isLoading = status === 'loading'
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const data = new FormData(form)
+
+    setStatus('loading')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          phone: data.get('phone'),
+          company: data.get('company'),
+          service: data.get('service'),
+          message: data.get('message'),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Unable to send enquiry')
+      }
+
+      form.reset()
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
-    <form action={formSubmitAction} method="POST">
-      <input type="hidden" name="_subject" value="New VirtualDxB Website Enquiry" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
+    <form onSubmit={handleSubmit}>
       <div className="form-grid">
-        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required />
-        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required />
+        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required disabled={isLoading} />
+        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required disabled={isLoading} />
       </div>
       <div className="form-grid">
-        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
-        <input type="text" name="company" placeholder="Company name" aria-label="Company name" />
+        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required disabled={isLoading} />
+        <input type="text" name="company" placeholder="Company name" aria-label="Company name" disabled={isLoading} />
       </div>
-      <select name="service" aria-label="Service need" defaultValue="">
+      <select name="service" aria-label="Service need" defaultValue="" disabled={isLoading}>
         <option value="" disabled>Primary service needed</option>
         {services.map(([service]) => <option key={service} value={service}>{service}</option>)}
       </select>
-      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required></textarea>
-      <button className="btn primary" type="submit">Send enquiry</button>
-      <p className="form-note">Enquiries are sent securely to {formSubmitEmail}.</p>
+      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required disabled={isLoading}></textarea>
+      <button className="btn primary" type="submit" disabled={isLoading}>
+        {isLoading ? 'Sending enquiry...' : 'Send enquiry'}
+      </button>
+      {status === 'success' && (
+        <p className="form-note" role="status">Thank you. Your enquiry has been received.</p>
+      )}
+      {status === 'error' && (
+        <p className="form-note" role="alert">Something went wrong. Please try again in a moment.</p>
+      )}
+      {status === 'idle' && (
+        <p className="form-note">Enquiries are sent securely to VirtualDxB.</p>
+      )}
     </form>
   )
 }
