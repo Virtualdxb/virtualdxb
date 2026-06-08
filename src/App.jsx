@@ -29,9 +29,9 @@ const steps = [
 const industries = ['Real Estate', 'Medical Clinics', 'Legal Firms', 'Hospitality', 'E-commerce', 'Business Consulting', 'Salons & Spas', 'Corporate Offices']
 
 const pricing = [
-  ['Essential', 'AED 299', 'For lean teams that need professional coverage.', ['Business-hours answering', 'Message taking', 'Email notifications', 'Appointment requests']],
-  ['Signature', 'AED 499', 'For growing UAE businesses that need 24/7 response.', ['24/7 phone answering', 'Virtual receptionist', 'WhatsApp support', 'Live chat support', 'Priority escalation']],
-  ['Custom', 'Custom AED', 'For high-volume operations and multi-location teams.', ['Dedicated workflow design', 'Multi-channel coverage', 'VIP response rules', 'CRM-ready handovers']],
+  ['Essential', 'AED 299/month', 'For lean teams that need professional business-hours coverage.', ['Answer calls during business hours', 'Take messages', 'Email/WhatsApp summary to client', 'Up to 100 calls/month']],
+  ['Signature', 'AED 499/month', 'For growing UAE businesses that need stronger enquiry handling.', ['Everything in Essential', 'WhatsApp support', 'Appointment booking', 'Lead qualification', 'Up to 250 calls/month']],
+  ['Custom', 'Custom', 'For high-volume operations and tailored reception workflows.', ['24/7 coverage', 'Multi-agent support', 'Custom scripts', 'Dedicated account manager']],
 ]
 
 const testimonials = [
