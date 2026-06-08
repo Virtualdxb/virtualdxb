@@ -47,8 +47,6 @@ const faqs = [
   ['Can the service feel like our own team?', 'Yes. We align greetings, tone, scripts, escalation rules, and handover formats to your business.'],
 ]
 
-const whatsAppNumber = '971500000000'
-
 function Logo() {
   return (
     <a className="logo" href="#hero" aria-label="VirtualDxB home">
@@ -358,16 +356,12 @@ function App() {
         <p>Premium phone answering, WhatsApp support, live chat, appointment booking, and customer communication for UAE businesses.</p>
       </footer>
 
-      <a
-        className="whatsapp-float"
-        href={`https://wa.me/${whatsAppNumber}?text=${encodeURIComponent('Hello VirtualDxB, I would like to discuss virtual reception support for my UAE business.')}`}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Chat with VirtualDxB on WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 3.5C9.1 3.5 3.5 9 3.5 15.8c0 2.2.6 4.3 1.6 6.1L3.8 28l6.3-1.2c1.8 1 3.8 1.5 5.9 1.5 6.9 0 12.5-5.5 12.5-12.3S22.9 3.5 16 3.5Zm0 22.3c-1.9 0-3.7-.5-5.2-1.5l-.4-.2-3.7.7.8-3.6-.2-.4c-1.1-1.6-1.6-3.5-1.6-5.4 0-5.5 4.6-10 10.3-10s10.3 4.5 10.3 10-4.6 10.4-10.3 10.4Zm5.8-7.5c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.5c.2.3 2.4 3.7 5.9 5.1.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.5Z" />
+      <a className="floating-consultation" href="#contact" aria-label="Get free consultation">
+        <span className="floating-tooltip" role="tooltip">Speak with a VirtualDxB specialist</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3.5A7.5 7.5 0 0 0 4.5 11v3.25A2.75 2.75 0 0 0 7.25 17H8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H6.5A5.5 5.5 0 0 1 17.5 11H16a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1.35A3.55 3.55 0 0 1 14 19.5h-1.25a1 1 0 1 0 0 2H14a5.55 5.55 0 0 0 5.47-4.68A2.75 2.75 0 0 0 21.5 14.25V11A7.5 7.5 0 0 0 12 3.5Z" />
         </svg>
+        <span>Get Free Consultation</span>
       </a>
     </main>
   )
