@@ -82,6 +82,7 @@ function SkylineDivider() {
 
 function LeadForm() {
   const [status, setStatus] = useState('idle')
+  const [errorDetails, setErrorDetails] = useState(null)
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -93,6 +94,7 @@ function LeadForm() {
     }
 
     setStatus('loading')
+    setErrorDetails(null)
 
     try {
       const response = await fetch(formSubmitAjaxAction, {
@@ -102,14 +104,42 @@ function LeadForm() {
           Accept: 'application/json',
         },
       })
+      const responseText = await response.text()
+      let responseBody = responseText
+
+      try {
+        responseBody = responseText ? JSON.parse(responseText) : null
+      } catch {
+        responseBody = responseText
+      }
+
+      console.log('FormSubmit response', {
+        ok: response.ok,
+        status: response.status,
+        statusText: response.statusText,
+        body: responseBody,
+      })
 
       if (!response.ok) {
-        throw new Error('Unable to send enquiry')
+        const message =
+          responseBody?.message ||
+          responseBody?.error ||
+          responseBody?.errors?.join?.(', ') ||
+          responseText ||
+          response.statusText ||
+          'Unable to send enquiry'
+
+        throw new Error(message, { cause: { status: response.status, body: responseBody } })
       }
 
       form.reset()
       setStatus('success')
-    } catch {
+    } catch (error) {
+      console.error('FormSubmit submission failed', error)
+      setErrorDetails({
+        statusCode: error.cause?.status || 'Network error',
+        message: error.message || 'Unable to send enquiry',
+      })
       setStatus('error')
     }
   }
@@ -142,7 +172,9 @@ function LeadForm() {
         <p className="form-note" role="status">Thank you. Your enquiry has been received.</p>
       )}
       {status === 'error' && (
-        <p className="form-note" role="alert">Something went wrong. Please try again in a moment.</p>
+        <p className="form-note" role="alert">
+          Submission failed. Status: {errorDetails?.statusCode}. Error: {errorDetails?.message}
+        </p>
       )}
       {status === 'idle' && (
         <p className="form-note">Enquiries are sent securely to {formSubmitEmail}.</p>
