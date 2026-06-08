@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import heroImage from './assets/virtualdxb-dubai-hero.png'
 import './App.css'
 
@@ -47,7 +47,9 @@ const faqs = [
   ['Can the service feel like our own team?', 'Yes. We align greetings, tone, scripts, escalation rules, and handover formats to your business.'],
 ]
 
-const emailAddress = 'hello@virtualdxb.ae'
+const formSubmitEmail = 'virtualdxb.business@gmail.com'
+const formSubmitAction = `https://formsubmit.co/${formSubmitEmail}`
+const formSubmitAjaxAction = `https://formsubmit.co/ajax/${formSubmitEmail}`
 const whatsAppNumber = '971500000000'
 
 function Logo() {
@@ -79,39 +81,72 @@ function SkylineDivider() {
 }
 
 function LeadForm() {
-  function handleSubmit(event) {
-    event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    const body = [
-      `Name: ${data.get('name') || ''}`,
-      `Email: ${data.get('email') || ''}`,
-      `Phone: ${data.get('phone') || ''}`,
-      `Company: ${data.get('company') || ''}`,
-      `Service need: ${data.get('service') || ''}`,
-      '',
-      `Message: ${data.get('message') || ''}`,
-    ].join('\n')
+  const [status, setStatus] = useState('idle')
 
-    window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent('VirtualDxB lead enquiry')}&body=${encodeURIComponent(body)}`
+  async function handleSubmit(event) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const data = new FormData(form)
+
+    if (data.get('_honey')) {
+      return
+    }
+
+    setStatus('loading')
+
+    try {
+      const response = await fetch(formSubmitAjaxAction, {
+        method: 'POST',
+        body: data,
+        headers: {
+          Accept: 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error('Unable to send enquiry')
+      }
+
+      form.reset()
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
   }
 
+  const isLoading = status === 'loading'
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={formSubmitAction} method="POST" onSubmit={handleSubmit}>
+      <input type="hidden" name="_subject" value="New VirtualDxB website enquiry" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" style={{ display: 'none' }} />
       <div className="form-grid">
-        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required />
-        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required />
+        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required disabled={isLoading} />
+        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required disabled={isLoading} />
       </div>
       <div className="form-grid">
-        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
-        <input type="text" name="company" placeholder="Company name" aria-label="Company name" />
+        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required disabled={isLoading} />
+        <input type="text" name="company" placeholder="Company name" aria-label="Company name" disabled={isLoading} />
       </div>
-      <select name="service" aria-label="Service need" defaultValue="">
+      <select name="service" aria-label="Service need" defaultValue="" disabled={isLoading}>
         <option value="" disabled>Primary service needed</option>
         {services.map(([service]) => <option key={service} value={service}>{service}</option>)}
       </select>
-      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required></textarea>
-      <button className="btn primary" type="submit">Email my enquiry</button>
-      <p className="form-note">Submits through your email client to {emailAddress}.</p>
+      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required disabled={isLoading}></textarea>
+      <button className="btn primary" type="submit" disabled={isLoading}>
+        {isLoading ? 'Sending enquiry...' : 'Send enquiry'}
+      </button>
+      {status === 'success' && (
+        <p className="form-note" role="status">Thank you. Your enquiry has been received.</p>
+      )}
+      {status === 'error' && (
+        <p className="form-note" role="alert">Something went wrong. Please try again in a moment.</p>
+      )}
+      {status === 'idle' && (
+        <p className="form-note">Enquiries are sent securely to {formSubmitEmail}.</p>
+      )}
     </form>
   )
 }
