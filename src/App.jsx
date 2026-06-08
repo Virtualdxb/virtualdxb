@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import heroImage from './assets/virtualdxb-dubai-hero.png'
 import './App.css'
 
@@ -49,7 +49,6 @@ const faqs = [
 
 const formSubmitEmail = 'virtualdxb.business@gmail.com'
 const formSubmitAction = `https://formsubmit.co/${formSubmitEmail}`
-const formSubmitAjaxAction = `https://formsubmit.co/ajax/${formSubmitEmail}`
 const whatsAppNumber = '971500000000'
 
 function Logo() {
@@ -81,104 +80,26 @@ function SkylineDivider() {
 }
 
 function LeadForm() {
-  const [status, setStatus] = useState('idle')
-  const [errorDetails, setErrorDetails] = useState(null)
-
-  async function handleSubmit(event) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const data = new FormData(form)
-
-    if (data.get('_honey')) {
-      return
-    }
-
-    setStatus('loading')
-    setErrorDetails(null)
-
-    try {
-      const response = await fetch(formSubmitAjaxAction, {
-        method: 'POST',
-        body: data,
-        headers: {
-          Accept: 'application/json',
-        },
-      })
-      const responseText = await response.text()
-      let responseBody = responseText
-
-      try {
-        responseBody = responseText ? JSON.parse(responseText) : null
-      } catch {
-        responseBody = responseText
-      }
-
-      console.log('FormSubmit response', {
-        ok: response.ok,
-        status: response.status,
-        statusText: response.statusText,
-        body: responseBody,
-      })
-
-      if (!response.ok) {
-        const message =
-          responseBody?.message ||
-          responseBody?.error ||
-          responseBody?.errors?.join?.(', ') ||
-          responseText ||
-          response.statusText ||
-          'Unable to send enquiry'
-
-        throw new Error(message, { cause: { status: response.status, body: responseBody } })
-      }
-
-      form.reset()
-      setStatus('success')
-    } catch (error) {
-      console.error('FormSubmit submission failed', error)
-      setErrorDetails({
-        statusCode: error.cause?.status || 'Network error',
-        message: error.message || 'Unable to send enquiry',
-      })
-      setStatus('error')
-    }
-  }
-
-  const isLoading = status === 'loading'
-
   return (
-    <form action={formSubmitAction} method="POST" onSubmit={handleSubmit}>
-      <input type="hidden" name="_subject" value="New VirtualDxB website enquiry" />
+    <form action={formSubmitAction} method="POST">
+      <input type="hidden" name="_subject" value="New VirtualDxB Website Enquiry" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
-      <input type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" style={{ display: 'none' }} />
       <div className="form-grid">
-        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required disabled={isLoading} />
-        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required disabled={isLoading} />
+        <input type="text" name="name" placeholder="Full name" aria-label="Full name" required />
+        <input type="email" name="email" placeholder="Business email" aria-label="Business email" required />
       </div>
       <div className="form-grid">
-        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required disabled={isLoading} />
-        <input type="text" name="company" placeholder="Company name" aria-label="Company name" disabled={isLoading} />
+        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number" required />
+        <input type="text" name="company" placeholder="Company name" aria-label="Company name" />
       </div>
-      <select name="service" aria-label="Service need" defaultValue="" disabled={isLoading}>
+      <select name="service" aria-label="Service need" defaultValue="">
         <option value="" disabled>Primary service needed</option>
         {services.map(([service]) => <option key={service} value={service}>{service}</option>)}
       </select>
-      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required disabled={isLoading}></textarea>
-      <button className="btn primary" type="submit" disabled={isLoading}>
-        {isLoading ? 'Sending enquiry...' : 'Send enquiry'}
-      </button>
-      {status === 'success' && (
-        <p className="form-note" role="status">Thank you. Your enquiry has been received.</p>
-      )}
-      {status === 'error' && (
-        <p className="form-note" role="alert">
-          Submission failed. Status: {errorDetails?.statusCode}. Error: {errorDetails?.message}
-        </p>
-      )}
-      {status === 'idle' && (
-        <p className="form-note">Enquiries are sent securely to {formSubmitEmail}.</p>
-      )}
+      <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required></textarea>
+      <button className="btn primary" type="submit">Send enquiry</button>
+      <p className="form-note">Enquiries are sent securely to {formSubmitEmail}.</p>
     </form>
   )
 }
