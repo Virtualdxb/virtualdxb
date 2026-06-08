@@ -357,7 +357,7 @@ function App() {
       </footer>
 
       <a className="floating-consultation" href="#contact" aria-label="Get free consultation">
-        <span className="floating-tooltip" role="tooltip">Speak with a VirtualDxB specialist</span>
+        <span className="floating-tooltip" role="tooltip">Book a free consultation with a VirtualDxB specialist.</span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 3.5A7.5 7.5 0 0 0 4.5 11v3.25A2.75 2.75 0 0 0 7.25 17H8a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H6.5A5.5 5.5 0 0 1 17.5 11H16a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1.35A3.55 3.55 0 0 1 14 19.5h-1.25a1 1 0 1 0 0 2H14a5.55 5.55 0 0 0 5.47-4.68A2.75 2.75 0 0 0 21.5 14.25V11A7.5 7.5 0 0 0 12 3.5Z" />
         </svg>
