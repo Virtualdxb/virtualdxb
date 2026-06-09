@@ -749,6 +749,19 @@ h3 {
 .contact-card select {
   min-height: 54px;
   padding: 0 16px;
+  color: #fff;
+}
+
+select option,
+.contact-card select option {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+}
+
+select option:checked,
+select option:hover {
+  color: #0f172a !important;
+  background-color: #f1d46b !important;
 }
 
 .contact-card textarea {
