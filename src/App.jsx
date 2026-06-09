@@ -11,6 +11,25 @@ const services = [
   ['Customer Communication', 'Message taking, email notifications, escalation notes, and structured handovers.'],
 ]
 
+const contactServices = [
+  'Virtual Receptionist',
+  'Phone Answering',
+  'WhatsApp Support',
+  'Email Support',
+  'Appointment Booking',
+  'Lead Qualification',
+  'Customer Service Outsourcing',
+  'Custom Requirements',
+]
+
+const callVolumeOptions = [
+  'Less than 100 calls',
+  '100-250 calls',
+  '250-500 calls',
+  '500+ calls',
+  'Not Sure',
+]
+
 const stats = [
   ['24/7', 'Coverage for UAE businesses'],
   ['AED 1K+', 'Premium monthly service tier'],
@@ -98,6 +117,7 @@ function LeadForm() {
           phone: data.get('phone'),
           company: data.get('company'),
           service: data.get('service'),
+          callVolume: data.get('callVolume'),
           message: data.get('message'),
         }),
       })
@@ -124,8 +144,12 @@ function LeadForm() {
         <input type="text" name="company" placeholder="Company name" aria-label="Company name" disabled={isLoading} />
       </div>
       <select name="service" aria-label="Service need" defaultValue="" disabled={isLoading}>
-        <option value="" disabled>Primary service needed</option>
-        {services.map(([service]) => <option key={service} value={service}>{service}</option>)}
+        <option value="" disabled>How can VirtualDxB help you?</option>
+        {contactServices.map((service) => <option key={service} value={service}>{service}</option>)}
+      </select>
+      <select name="callVolume" aria-label="Estimated monthly call volume" defaultValue="" disabled={isLoading}>
+        <option value="" disabled>Estimated Monthly Call Volume</option>
+        {callVolumeOptions.map((volume) => <option key={volume} value={volume}>{volume}</option>)}
       </select>
       <textarea name="message" rows="5" placeholder="What should VirtualDxB handle for you?" aria-label="Message" required disabled={isLoading}></textarea>
       <button className="btn primary" type="submit" disabled={isLoading}>

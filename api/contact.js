@@ -21,7 +21,7 @@ export default async function handler(request, response) {
     return response.status(500).json({ error: 'RESEND_API_KEY is not configured' })
   }
 
-  const { name, email, phone, company, service, message } = request.body || {}
+  const { name, email, phone, company, service, callVolume, message } = request.body || {}
 
   if (!name || !email || !phone || !message) {
     return response.status(400).json({ error: 'Name, email, phone, and message are required' })
@@ -33,6 +33,7 @@ export default async function handler(request, response) {
     ['Phone', phone],
     ['Company', company],
     ['Service', service],
+    ['Estimated Monthly Call Volume', callVolume],
     ['Message', message],
   ]
 
