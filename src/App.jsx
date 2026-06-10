@@ -11,6 +11,17 @@ const services = [
   ['Customer Communication', 'Message taking, email notifications, escalation notes, and structured handovers.'],
 ]
 
+const additionalServices = [
+  [
+    'Website Design & Development',
+    'Professional business websites, landing pages, contact forms, and business email setup tailored for UAE startups and small businesses.',
+  ],
+  [
+    'Logo & Brand Identity Design',
+    'Professional logo creation, brand colours, business stationery, and visual identity design to help your business stand out.',
+  ],
+]
+
 const contactServices = [
   'Virtual Receptionist',
   'Phone Answering',
@@ -18,7 +29,8 @@ const contactServices = [
   'Email Support',
   'Appointment Booking',
   'Lead Qualification',
-  'Customer Service Outsourcing',
+  'Website Design & Development',
+  'Logo & Brand Identity Design',
   'Custom Requirements',
 ]
 
@@ -272,6 +284,25 @@ function App() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="section additional-services" aria-label="Additional Services">
+        <div className="section-heading">
+          <p className="eyebrow navy">Additional Services</p>
+          <h2>Helping UAE businesses establish a professional presence from day one.</h2>
+        </div>
+        <div className="service-grid">
+          {additionalServices.map(([title, text], index) => (
+            <article className="service-card reveal" style={{ '--delay': `${index * 60}ms` }} key={title}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+        <p className="form-note">
+          Need help launching your business online? VirtualDxB can assist with website and branding solutions alongside our communication services.
+        </p>
       </section>
 
       <section className="section cta-panel" aria-label="VirtualDxB premium setup">
