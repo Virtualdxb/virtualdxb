@@ -6,9 +6,9 @@ const services = [
   ['24/7 Phone Answering', 'Dedicated call handling for leads, clients, and urgent customer requests at any hour.'],
   ['Virtual Receptionist', 'A polished UAE front-desk presence without hiring a full in-house reception team.'],
   ['WhatsApp Support', 'Fast customer replies, lead capture, follow-ups, and message routing through WhatsApp.'],
-  ['Live Chat Support', 'Website chat coverage that helps visitors get answers before they leave.'],
+  ['Email Support', 'Professional inbox support, enquiry sorting, response coordination, and customer updates.'],
   ['Appointment Booking', 'Calendar coordination, confirmation details, and booking updates sent to your team.'],
-  ['Customer Communication', 'Message taking, email notifications, escalation notes, and structured handovers.'],
+  ['Lead Qualification', 'Customer details, enquiry intent, priority level, and next steps captured before handover.'],
 ]
 
 const additionalServices = [
@@ -49,7 +49,7 @@ const stats = [
   ['0', 'Missed opportunities by design'],
 ]
 
-const trust = ['UAE business hours and after-hours', 'Arabic and English workflow ready', 'Lead capture and escalation', 'WhatsApp-first customer support']
+const trust = ['Works with your existing business number', 'Call forwarding support available', 'Lead capture and escalation', 'WhatsApp-first customer support']
 
 const steps = [
   ['01', 'Map your customer flow', 'We define greetings, call scripts, WhatsApp rules, booking logic, and escalation paths.'],
@@ -72,7 +72,8 @@ const testimonials = [
 ]
 
 const faqs = [
-  ['Is VirtualDxB available 24/7?', 'Yes. Our Prestige and Signature plans are built for 24/7 phone answering and customer communication coverage.'],
+  ['Is VirtualDxB available 24/7?', 'Yes. Custom plans can include 24/7 phone answering and customer communication coverage.'],
+  ['Do I need a new phone number?', 'No. You can start with your existing business number. If required, VirtualDxB can guide you on call forwarding or number setup options.'],
   ['Can you handle WhatsApp support?', 'Yes. We manage WhatsApp responses, lead capture, booking requests, follow-ups, and escalation messages.'],
   ['Do you work with UAE appointment-based businesses?', 'Yes. Clinics, real estate teams, consultants, salons, and service companies can use our booking workflows.'],
   ['Can the service feel like our own team?', 'Yes. We align greetings, tone, scripts, escalation rules, and handover formats to your business.'],
@@ -225,8 +226,8 @@ function App() {
           <p className="eyebrow">VirtualDxB</p>
           <h1>Never Miss a Customer Call Again</h1>
           <p className="hero-subhead">
-            24/7 phone answering, WhatsApp support, live chat, appointment booking and customer communication
-            services for UAE businesses.
+            Virtual receptionist, phone answering, WhatsApp support, email support, appointment booking,
+            lead qualification, website design, and logo design services for UAE businesses.
           </p>
           <div className="hero-actions">
             <a className="btn primary" href="#contact">Start premium coverage</a>
@@ -309,7 +310,7 @@ function App() {
         <div>
           <p className="eyebrow">Premium setup</p>
           <h2>Install a Dubai-grade reception experience in days, not months.</h2>
-          <p>We align your scripts, appointment rules, WhatsApp response flow, and escalation process before your coverage goes live.</p>
+          <p>We align your scripts, appointment rules, WhatsApp response flow, call forwarding preferences, and escalation process before your coverage goes live.</p>
         </div>
         <a className="btn primary" href="#contact">Design my workflow</a>
       </section>
