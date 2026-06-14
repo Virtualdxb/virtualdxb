@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import heroImage from './assets/virtualdxb-dubai-hero.png'
-import logoImage from './assets/virtualdxb-logo.png'
 import './App.css'
 
 const services = [
@@ -83,7 +82,11 @@ const faqs = [
 function Logo() {
   return (
     <a className="logo" href="#hero" aria-label="VirtualDxB - Virtual Receptionists for UAE Businesses">
-      <img src={logoImage} alt="VirtualDxB - Your UAE Virtual Reception Team" width="340" height="82" />
+      <span className="logo-monogram" aria-hidden="true">VD</span>
+      <span className="logo-copy">
+        <strong>VirtualDxB</strong>
+        <small>YOUR UAE VIRTUAL RECEPTION TEAM</small>
+      </span>
     </a>
   )
 }

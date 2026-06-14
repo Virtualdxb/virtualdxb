@@ -1,12 +1,12 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="gold" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+    <linearGradient id="gold" x1="10" y1="9" x2="54" y2="55" gradientUnits="userSpaceOnUse">
       <stop stop-color="#F7E8A6"/>
-      <stop offset="0.48" stop-color="#C9A227"/>
-      <stop offset="1" stop-color="#8F6F12"/>
+      <stop offset="0.55" stop-color="#C9A227"/>
+      <stop offset="1" stop-color="#9F7D16"/>
     </linearGradient>
   </defs>
-  <rect x="5" y="5" width="54" height="54" rx="14" fill="#0F172A"/>
-  <rect x="8" y="8" width="48" height="48" rx="11" stroke="url(#gold)" stroke-width="2"/>
-  <text x="32" y="39" text-anchor="middle" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" letter-spacing="-1">VD</text>
+  <rect x="5" y="5" width="54" height="54" rx="13" fill="#0F172A"/>
+  <rect x="9" y="9" width="46" height="46" rx="10" stroke="url(#gold)" stroke-width="2"/>
+  <text x="32" y="39" text-anchor="middle" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="0">VD</text>
 </svg>
