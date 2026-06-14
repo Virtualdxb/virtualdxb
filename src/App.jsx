@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import heroImage from './assets/virtualdxb-dubai-hero.png'
+import logoImage from './assets/virtualdxb-logo.png'
 import './App.css'
 
 const services = [
@@ -82,20 +83,7 @@ const faqs = [
 function Logo() {
   return (
     <a className="logo" href="#hero" aria-label="VirtualDxB - Virtual Receptionists for UAE Businesses">
-      <svg className="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
-        <path className="logo-shell" d="M32 4L57 18V46L32 60L7 46V18L32 4Z" />
-        <path className="logo-palm" d="M32 16C27 19 24.3 23.4 24.1 29.2C27.6 27.1 30.1 24.1 32 20.3C33.9 24.1 36.4 27.1 39.9 29.2C39.7 23.4 37 19 32 16Z" />
-        <path className="logo-palm" d="M31.9 20.5C30.3 25 30.1 29.6 31.2 34.1H32.8C33.9 29.6 33.7 25 32.1 20.5H31.9Z" />
-        <path className="logo-headset" d="M20 37V31.5C20 24.9 25.4 19.5 32 19.5C38.6 19.5 44 24.9 44 31.5V37" />
-        <path className="logo-headset-fill" d="M17 35.5C17 33.3 18.8 31.5 21 31.5H24V43H21C18.8 43 17 41.2 17 39V35.5Z" />
-        <path className="logo-headset-fill" d="M40 31.5H43C45.2 31.5 47 33.3 47 35.5V39C47 41.2 45.2 43 43 43H40V31.5Z" />
-        <path className="logo-headset" d="M43 43C41.4 47.2 37.6 49.5 32.8 49.5H29.5" />
-        <path className="logo-mic" d="M27 49.5H33" />
-      </svg>
-      <span className="logo-copy">
-        <strong>VirtualDxB</strong>
-        <small>YOUR UAE VIRTUAL RECEPTION TEAM</small>
-      </span>
+      <img src={logoImage} alt="VirtualDxB - Your UAE Virtual Reception Team" width="340" height="82" />
     </a>
   )
 }
