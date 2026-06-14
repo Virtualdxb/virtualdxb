@@ -1,14 +1,12 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="g" x1="5" y1="5" x2="59" y2="59" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F5DC7A"/>
+    <linearGradient id="gold" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7E8A6"/>
       <stop offset="0.48" stop-color="#C9A227"/>
       <stop offset="1" stop-color="#8F6F12"/>
     </linearGradient>
   </defs>
-  <path d="M32 4L57 18V46L32 60L7 46V18L32 4Z" fill="url(#g)" stroke="#F2D979" stroke-width="1.5"/>
-  <path d="M17 45H47" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M21 43V28H27V43" fill="#0F172A"/>
-  <path d="M30 43V18L35 14L40 18V43" fill="#0F172A"/>
-  <path d="M43 43V25H49V43" fill="#0F172A"/>
+  <rect x="5" y="5" width="54" height="54" rx="14" fill="#0F172A"/>
+  <rect x="8" y="8" width="48" height="48" rx="11" stroke="url(#gold)" stroke-width="2"/>
+  <text x="32" y="39" text-anchor="middle" fill="url(#gold)" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" letter-spacing="-1">VD</text>
 </svg>
