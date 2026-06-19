@@ -46,39 +46,50 @@ export default async function handler(request, response) {
     `)
     .join('')
 
-  const resendResponse = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: 'VirtualDxB Website <onboarding@resend.dev>',
-      to: [recipientEmail],
-      reply_to: email,
-      subject: 'New VirtualDxB Website Enquiry',
-      html: `
-        <div style="font-family:Arial,sans-serif;background:#fffdf8;padding:24px;">
-          <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #e8dcc0;border-radius:8px;overflow:hidden;">
-            <div style="background:#0f172a;color:#ffffff;padding:22px 24px;">
-              <h1 style="margin:0;font-size:22px;">New VirtualDxB Website Enquiry</h1>
+  try {
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'VirtualDxB Website <onboarding@resend.dev>',
+        to: recipientEmail,
+        reply_to: email,
+        subject: 'New VirtualDxB Website Enquiry',
+        html: `
+          <div style="font-family:Arial,sans-serif;background:#fffdf8;padding:24px;">
+            <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #e8dcc0;border-radius:8px;overflow:hidden;">
+              <div style="background:#0f172a;color:#ffffff;padding:22px 24px;">
+                <h1 style="margin:0;font-size:22px;">New VirtualDxB Website Enquiry</h1>
+              </div>
+              <table style="width:100%;border-collapse:collapse;">
+                ${htmlRows}
+              </table>
             </div>
-            <table style="width:100%;border-collapse:collapse;">
-              ${htmlRows}
-            </table>
           </div>
-        </div>
-      `,
-    }),
-  })
+        `,
+      }),
+    })
 
-  const result = await resendResponse.json().catch(() => ({}))
+    const result = await resendResponse.json().catch(() => ({}))
 
-  if (!resendResponse.ok) {
-    return response.status(resendResponse.status).json({
-      error: result.message || 'Unable to send enquiry',
+    if (!resendResponse.ok) {
+      const error = result.message || result.error || 'Resend failed to send enquiry'
+      console.error('Resend error:', error)
+      return response.status(resendResponse.status).json({
+        error,
+        details: result,
+      })
+    }
+
+    return response.status(200).json({ ok: true })
+  } catch (error) {
+    console.error('Resend error:', error)
+    return response.status(500).json({
+      error: 'Unable to send enquiry through Resend',
+      details: error instanceof Error ? error.message : String(error),
     })
   }
-
-  return response.status(200).json({ ok: true })
 }
