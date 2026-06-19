@@ -1,6 +1,6 @@
 /* global process */
 
-const recipientEmail = 'virtualdxb.business@gmail.com'
+const recipientEmail = 'hello@virtualdxb.com'
 
 function escapeHtml(value) {
   return String(value || '')

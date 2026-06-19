@@ -396,6 +396,11 @@ function App() {
               Share your channels, opening hours, call volume, and customer journey. We will recommend the right
               VirtualDxB setup.
             </p>
+            <div className="contact-email-list" aria-label="VirtualDxB email contacts">
+              <a href="mailto:hello@virtualdxb.com"><span>Main contact</span>hello@virtualdxb.com</a>
+              <a href="mailto:sales@virtualdxb.com"><span>Sales</span>sales@virtualdxb.com</a>
+              <a href="mailto:careers@virtualdxb.com"><span>Careers</span>careers@virtualdxb.com</a>
+            </div>
           </div>
           <LeadForm />
         </div>
